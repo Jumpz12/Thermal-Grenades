@@ -17,14 +17,8 @@ end)
 
 hook.Add( "PostDrawTranslucentRenderables", "test", function()
 
-	--[[
-		when you draw a sphere, you have to specify what material the sphere is
-		going to have before rendering it, render.SetColorMaterial()
-		just sets it to a white material so we can recolor it easily.
-	--]]
 	render.SetColorMaterial()
 
-	-- The position to render the sphere at, in this case, the looking position of the local player
 	local pos = LocalPlayer():GetEyeTrace().HitPos
 
 	-- Draw the sphere!
