@@ -63,5 +63,5 @@ function SWEP:Think()
 end
 
 -- The following code does not need to exist on the server, so bail
-if ( SERVER ) then return end
+if ( SERVER ) then return end 
 
