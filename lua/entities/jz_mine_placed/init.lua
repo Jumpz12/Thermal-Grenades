@@ -4,13 +4,24 @@ include("shared.lua")
 
 function ENT:Initialize()
 
-    self:SetModel( "models/arccw/thermal_detonator.mdl" ) -- Sets the model for the Entity.
-    self:PhysicsInit( SOLID_VPHYSICS ) -- Initializes physics for the Entity, making it solid and interactable.
-    self:SetMoveType( MOVETYPE_NONE ) -- Sets how the Entity moves, using physics.
-    self:SetSolid( SOLID_VPHYSICS ) -- Makes the Entity solid, allowing for collisions.
-    local phys = self:GetPhysicsObject() -- Retrieves the physics object of the Entity.
-    if phys:IsValid() then -- Checks if the physics object is valid.
-        phys:Wake() -- Activates the physics object, making the Entity subject to physics (gravity, collisions, etc.).
+    self:SetModel( "models/arccw/thermal_detonator.mdl" )
+    self:PhysicsInit( SOLID_VPHYSICS )
+    self:SetMoveType( MOVETYPE_NONE )
+    self:SetSolid( SOLID_VPHYSICS )
+    self:SetCollisionGroup(COLLISION_GROUP_WORLD)
+    local phys = self:GetPhysicsObject()
+    if phys:IsValid() then
+        phys:Wake()
     end
 
+end
+
+function ENT:OnRemove()
+
+    local explode = ents.Create( "env_explosion" )
+	explode:SetPos( self:GetPos() )
+	explode:Spawn()
+	explode:SetKeyValue( "iMagnitude", "100" )
+	explode:Fire( "Explode", 0, 0 )
+	explode:EmitSound( "weapon_AWP.Single", 400, 400 )
 end

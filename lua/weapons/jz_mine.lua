@@ -55,7 +55,7 @@ function SWEP:PrimaryAttack()
 	if self:GetOwner():GetPos():Distance(pos) > self.PlaceRange then
 		print("NOT ALLOWED")
 	else
-		if #self.Owner.Bombs ~= 1 then
+		if #self.Owner.Bombs ~= 2 then
 			local ent = ents.Create("jz_mine_placed")
 			
 			-- Sets the position of the entity
@@ -80,10 +80,16 @@ function SWEP:SecondaryAttack()
 
 	if #self.Owner.Bombs > 0 then
 		for k, v in pairs(self.Owner.Bombs) do
-			print(v)
-			table.remove(self.Owner.Bombs, k)
-			v:Remove()
+			timer.Simple(0.5, function()
+				if IsValid(v) then
+					v:Remove()
+					table.remove(self.Owner.Bombs, k)
+				end
+				
+			end)
+			
 		end
+	self.Owner.Bombs = {}
 	end
 end
 
