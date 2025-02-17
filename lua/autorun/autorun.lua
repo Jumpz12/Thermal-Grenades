@@ -8,7 +8,6 @@ else
 
         local pos = LocalPlayer():GetEyeTrace().HitPos
 
-        -- Draw the sphere!
         if LocalPlayer():GetActiveWeapon():GetClass() == "jz_mine" then
             if LocalPlayer():GetPos():Distance(pos) < LocalPlayer():GetActiveWeapon().MaxRange then
                 if LocalPlayer():GetPos():Distance(pos) > LocalPlayer():GetActiveWeapon().PlaceRange then

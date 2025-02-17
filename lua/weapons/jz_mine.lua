@@ -58,11 +58,8 @@ function SWEP:PrimaryAttack()
 		if #self.Owner.Bombs ~= 2 then
 			local ent = ents.Create("jz_mine_placed")
 			
-			-- Sets the position of the entity
 			ent:SetPos(pos) 
-			-- Sets the angle of the entity
 			ent:SetAngles(self:GetOwner():LocalEyeAngles()) 
-			-- Spawns the entity on all clients
 			ent.Owner = self:GetOwner()
 			table.insert(self.Owner.Bombs, ent)
 			ent:Spawn()
